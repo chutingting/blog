@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css" rel="stylesheet">
+        .m30{
+            margin-left: 30px;
+        }
+        pre{
+            background-color: #f7f7f7;
+        }
+    </style>
+</head>
+<body>
+    <div style="text-align: center;"><h1>Promise</h1></div>
+
+    <p class="m30">首先Promise是为了解决什么问题的, 答案是:回调函数, 这点非常重要</p>
+
+    <p class="m30">在传统的ajax里面, 对于单层的ajax的成功与否都是写在success函数里面, 如果存在多个ajax函数需要执行, 那么只能在callback函数里面进行嵌套操作, 这样对于代码的维护性造成了非常麻烦的开销.</p>
+
+    <p class="m30">除去ajax不说, 比如前台需要进行一些大数据操作, 处理一个百万级别的数据, 处理完毕后进行下一步操作, 平常的处理方式就是把函数作为callback的形式传递进去, 如果存在多个嵌套, 这块逻辑的维护性也会非常的麻烦.</p>
+
+    <p class="m30">这个时候 promise 出现了, promise的出现就是为了解决这类问题.(一种类似委托的形式)</p>
+
+    <p class="m30">比如一个ajax操作依赖于另外的ajax操作, 如果我们的写法是这样 a.then().then(), 是不是很容易维护,代码非常的清晰</p>
+
+    <p class="m30">q.js里面比较常用而且重要的方法为:</p>
+    <pre>
+        var defer = Q.defer();
+        window.setTimeout(function(){
+            defer.resolve({rc:true,data:msg + " is done!"});
+        },time);
+        return defer.promise;
+    </pre>
+    <p class="m30">defer为一个对象, 这个对象拥有resolve, reject, notify方法, 我们一般用到resolve方法</p>
+
+    <p class="m30">一旦被reject掉, 后面的链式操作将会停止, 所以一般都会是resolve一个对象,这个对象里面有个标识当前操作的成功状态!</p>
+    <pre>
+        function doAction(){
+            action("action 1",0).then(function(d){
+                document.querySelector("#d1").innerHTML += d.data + "<br/>";
+                if(d.rc){
+                    return action("action 2",2000);
+                }else{
+                    console.log("error is "+ d.msg);
+                }
+            }).then(function(d){
+                document.querySelector("#d1").innerHTML += d.data + "<br/>";
+            })
+        }
+    </pre>
+
+    <p><a href="../code/code.html">代码链接</a></p>
+    <p><a href="https://github.com/kriskowal/q">官方文档</a></p>
+</body>
+</html>

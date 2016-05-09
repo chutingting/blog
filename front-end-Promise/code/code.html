@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="q.min.js"></script>
+</head>
+<body>
+    <input id="doa" type="button" value="执行链式操作" />
+    <input id="doall" type="button" value="执行All操作" />
+    <div>结果信息:</div>
+    <div id="d1" style="border: 1px solid red; width: 100%;height: 100%;"></div>
+</body>
+</html>
+<script>
+    function action(msg,time){
+        var defer = Q.defer();
+
+        window.setTimeout(function(){
+            defer.resolve({rc:true,data:msg + " is done!"});
+            document.querySelector("#d1").innerHTML += msg + " is done.....<br/>";
+        },time);
+
+        return defer.promise;
+    }
+
+    function doAction(){
+        action("action 1",0).then(function(d){
+            document.querySelector("#d1").innerHTML += d.data + "<br/>";
+            if(d.rc){
+                return action("action 2",2000);
+            }else{
+                console.log("error is "+ d.msg);
+            }
+        }).then(function(d){
+            document.querySelector("#d1").innerHTML += d.data + "<br/>";
+        })
+    }
+
+    document.querySelector("#doa").addEventListener("click",function(){
+        doAction();
+    },false);
+
+    document.querySelector("#doall").addEventListener("click",function(){
+        var p1 = action("action all 1",1000);
+        var p2 = action("action all 2",2000);
+        var p3 = action("action all 3",3000);
+
+        Q.all([p1,p2,p3]).then(function(d){
+            document.querySelector("#d1").innerHTML += "actionAll 1,2,3 all done!!!! <br/>";
+        })
+    },false);
+
+</script>
