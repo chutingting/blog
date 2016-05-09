@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="../Js_Framework_Library/jq_jqUI/jquery-ui.min.css" />
+    <script src="../Js_Framework_Library/jq_jqUI/jquery-1.11.2.min.js"></script>
+    <script src="../Js_Framework_Library/jq_jqUI/jquery-ui.min.js"></script>
+    <script src="../Js_Framework_Library/jq_jqUI/jquery.ui.datepicker-zh-CN.js"></script>
+</head>
+<body>
+
+    <input type="button" id="btn1" value="open" />
+
+    <div id="dialog">
+        <p>a</p>
+        <p>b</p>
+        <p>c</p>
+    </div>
+</body>
+</html>
+
+<script>
+    $("#dialog").dialog({
+        title:"title",
+        autoOpen:false,
+        width:300,
+        height:300,
+        buttons: {
+            '确定': function() {
+                $(this).dialog('close');
+            },
+            "关闭": function() {
+                $(this).dialog('close');
+            }
+        }
+    });
+
+    $("#btn1").click(function(){
+        $("#dialog").dialog("open");
+    })
+</script>

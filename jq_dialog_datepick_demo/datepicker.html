@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="../Js_Framework_Library/jq_jqUI/jquery-ui.min.css" />
+    <script src="../Js_Framework_Library/jq_jqUI/jquery-1.11.2.min.js"></script>
+    <script src="../Js_Framework_Library/jq_jqUI/jquery-ui.min.js"></script>
+    <script src="../Js_Framework_Library/jq_jqUI/jquery.ui.datepicker-zh-CN.js"></script>
+</head>
+<body>
+    <input type="text" id="d1" />
+</body>
+</html>
+<script>
+    $("#d1").datepicker({
+        inline: true,
+        changeMonth: true,
+        changeYear: false,
+        timeFormat: 'hh:mm:ss',
+        onSelect:function(a,b){
+            //console.log(a,b);
+        },
+        onClose:function(a,b){
+
+        }
+    });
+</script>
