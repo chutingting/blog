@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../../Angular_Framrwork_demo/resource/js/angular.js"></script>
+    <script src="paging.directive.js"></script>
+</head>
+<body ng-app="myApp">
+
+    <div ng-controller="ctl">
+
+        Name:<input type="text" ng-model="name"  />
+        Age:<input type="text" ng-model="age" />
+        <input type="button" ng-click="search();" value="Search" />
+
+        <paging callback-fn="cb" get-url="getUrl"></paging>
+    </div>
+
+</body>
+</html>
+<script>
+    var app = angular.module("myApp",['pagingModule']);
+
+    app.controller("ctl",function($scope){
+
+        $scope.name = "";
+        $scope.age = "";
+
+        $scope.getUrl = function(){
+            return "../../../data.json?name="+$scope.name + "&age="+ $scope.age;
+        }
+
+        $scope.cb = function(d){
+            console.log(d);
+        }
+
+        $scope.search = function(){
+            $scope.$broadcast("doSearch",{url:$scope.getUrl()});
+        }
+    })
+</script>
