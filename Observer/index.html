@@ -5,10 +5,13 @@
     <title></title>
 </head>
 <body>
-    <input id="txt1" type="text" />
-    <input id="txt2" type="text" />
-    <input id="txt3" type="text" />
-    <input id="txt4" type="text" />
+    <input id="txt1" type="text" value="0" />
+    <input id="txt2" type="text" value="0" />
+    <input id="txt3" type="text" value="0" />
+    <input id="txt4" type="text" value="0" />
+    <input id="txt5" type="text" value="0" />
+    <input id="txt6" type="text" value="0" />
+    <input id="txt7" type="text" value="0" />
 </body>
 </html>
 
@@ -17,15 +20,22 @@
 
         this.name = option.name;
 
-        this.value = "";
+        this.value = 0;
 
         this._observerArr = [];
         this._keyArr = [];
+        this._valArr = [];
+
+        this._calcFunction;
 
         this.setValue = function(value){
             this.value = value;
-
             this.update();
+            document.querySelector("#"+this.name).value = this.value;
+        }
+
+        this.getValue = function(){
+            return this.value;
         }
 
         this.registerObserver = function(observer){
@@ -41,21 +51,22 @@
             }
         }
 
-        this.setParams = function(key, obj){
-            this._keyArr.push(key);
-            this.registerObserver(obj);
+        this.setParams = function(func, parameterList){
+            this._calcFunction = func;
+            for(var index = 0; index < parameterList.length; index++){
+                parameterList[index].registerObserver(this);
+                this._valArr.push(parameterList[index]);
+            }
         }
 
         this.calc = function(){
-
+            this.setValue(this._calcFunction(this._valArr));
         }
 
         this.update = function(){
             for(var i=0;i<this._observerArr.length;i++){
-
                 console.log(this.name + "通知" + this._observerArr[i].name + "重新计算!");
-
-                this._observerArr[i].setValue(this._observerArr[i].value);
+                this._observerArr[i].calc();
             }
         }
     }
@@ -64,10 +75,19 @@
     var o2 = new Valobj({name:"txt2"});
     var o3 = new Valobj({name:"txt3"});
     var o4 = new Valobj({name:"txt4"});
+    var o5 = new Valobj({name:"txt5"});
+    var o6 = new Valobj({name:"txt6"});
+    var o7 = new Valobj({name:"txt7"});
 
-    o1.setParams("A",o3);
-    o2.setParams("B",o3);
-    o3.setParams("C",o4);
+    o3.setParams(function(arr){
+        return parseInt(arr[0].getValue()) + parseInt(arr[1].getValue());
+    },[o1, o2]);
+    o5.setParams(function (arr){
+        return parseInt(arr[0].getValue()) + parseInt(arr[1].getValue());
+    },[o3,o4]);
+    o7.setParams(function (arr){
+        return parseInt(arr[0].getValue()) + parseInt(arr[1].getValue());
+    },[o5,o6]);
 
     document.querySelector("#txt1").addEventListener("blur",function(){
         o1.setValue(this.value);
@@ -79,5 +99,16 @@
 
     document.querySelector("#txt3").addEventListener("blur",function(){
         o3.setValue(this.value);
+    },false);
+    document.querySelector("#txt4").addEventListener("blur",function(){
+        o4.setValue(this.value);
+    },false);
+
+    document.querySelector("#txt5").addEventListener("blur",function(){
+        o5.setValue(this.value);
+    },false);
+
+    document.querySelector("#txt6").addEventListener("blur",function(){
+        o6.setValue(this.value);
     },false);
 </script>
