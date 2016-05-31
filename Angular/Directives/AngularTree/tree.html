@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <link rel="stylesheet" type="text/css" href="css/tree-control.css">
+    <!--<link rel="stylesheet" type="text/css" href="css/tree-control-attribute.css">-->
+
+    <script src="../../Angular_Framrwork_demo/resource/js/angular.js"></script>
+    <script src="angular-tree-control.js"></script>
+</head>
+<body ng-app="myApp">
+    <div ng-controller="ctl">
+        <treecontrol class="tree-classic"
+                     tree-model="dataForTheTree"
+                     on-selection="showSelected(node)">
+            employee: {{node.name}} age {{node.age}}
+        </treecontrol>
+    </div>
+</body>
+</html>
+<script>
+    var app = angular.module("myApp",['treeControl']);
+
+    app.controller("ctl",function($scope){
+        $scope.dataForTheTree =
+                [
+                    { "name" : "Joe", "age" : "21", "children" : [
+                        { "name" : "Smith", "age" : "42", "children" : [] },
+                        { "name" : "Gary", "age" : "21", "children" : [
+                            { "name" : "Jenifer", "age" : "23", "children" : [
+                                { "name" : "Dani", "age" : "32", "children" : [] },
+                                { "name" : "Max", "age" : "34", "children" : [] }
+                            ]}
+                        ]}
+                    ]},
+                    { "name" : "Albert", "age" : "33", "children" : [] },
+                    { "name" : "Ron", "age" : "29", "children" : [] }
+                ];
+
+        $scope.showSelected = function(item){
+            console.log(item);
+        }
+    })
+
+
+</script>
