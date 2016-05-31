@@ -2,15 +2,58 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7b47a8f7-9753-4631-81fe-f0552103674f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Controls/checkBoxList.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Controls/data.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Controls/errorMsg.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Controls/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Controls/paging.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Controls/selctCheckbox.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Controls/selectRemote.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Controls/uploadFile.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Controls/validate.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Angular/Angular_Framrwork_demo/resource/js/angular-sanitize.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Angular/Angular_Framrwork_demo/resource/js/angular-ui-router.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Angular/Angular_Framrwork_demo/resource/js/angular.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Resource/Css/bootstrap/bootstrap.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Resource/JqueryUI/datepicker.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Resource/JqueryUI/dialog.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Angular/AngularKnowledgePoint/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Observer/index.html" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css_Framework_Library/bootstrap/bootstrap.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/jq_dialog_datepick_demo/datepicker.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/jq_dialog_datepick_demo/dialog.html" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Angular_Framrwork_demo/app.css" afterPath="$PROJECT_DIR$/Angular/Angular_Framrwork_demo/app.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Angular_Framrwork_demo/app.js" afterPath="$PROJECT_DIR$/Angular/Angular_Framrwork_demo/app.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Angular_Framrwork_demo/directives/d/d.css" afterPath="$PROJECT_DIR$/Angular/Angular_Framrwork_demo/directives/d/d.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Angular_Framrwork_demo/directives/d/d.directive.js" afterPath="$PROJECT_DIR$/Angular/Angular_Framrwork_demo/directives/d/d.directive.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Angular_Framrwork_demo/directives/d/d.html" afterPath="$PROJECT_DIR$/Angular/Angular_Framrwork_demo/directives/d/d.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Angular_Framrwork_demo/index.html" afterPath="$PROJECT_DIR$/Angular/Angular_Framrwork_demo/index.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Angular_Framrwork_demo/module/m/m.controller.js" afterPath="$PROJECT_DIR$/Angular/Angular_Framrwork_demo/module/m/m.controller.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Angular_Framrwork_demo/module/m/m.css" afterPath="$PROJECT_DIR$/Angular/Angular_Framrwork_demo/module/m/m.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Angular_Framrwork_demo/module/m/m.html" afterPath="$PROJECT_DIR$/Angular/Angular_Framrwork_demo/module/m/m.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Angular_Framrwork_demo/module/m/m.router.js" afterPath="$PROJECT_DIR$/Angular/Angular_Framrwork_demo/module/m/m.router.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Angular_Framrwork_demo/resource/js/angular-sanitize.js" afterPath="$PROJECT_DIR$/Resource/Js/angular/angular-sanitize.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Angular_Framrwork_demo/resource/js/angular-ui-router.js" afterPath="$PROJECT_DIR$/Resource/Js/angular/angular-ui-router.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Angular_Framrwork_demo/resource/js/angular.js" afterPath="$PROJECT_DIR$/Resource/Js/angular/angular.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Angular_Framrwork_demo/services/s1.js" afterPath="$PROJECT_DIR$/Angular/Angular_Framrwork_demo/services/s1.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Controls/checkBoxList.html" afterPath="$PROJECT_DIR$/WebComponents/checkBoxList.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Controls/data.json" afterPath="$PROJECT_DIR$/WebComponents/data.json" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Controls/errorMsg.html" afterPath="$PROJECT_DIR$/WebComponents/errorMsg.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Controls/index.html" afterPath="$PROJECT_DIR$/WebComponents/index.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Controls/paging.html" afterPath="$PROJECT_DIR$/WebComponents/paging.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Controls/selctCheckbox.html" afterPath="$PROJECT_DIR$/WebComponents/selctCheckbox.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Controls/selectRemote.html" afterPath="$PROJECT_DIR$/WebComponents/selectRemote.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Controls/uploadFile.html" afterPath="$PROJECT_DIR$/WebComponents/uploadFile.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Controls/validate.html" afterPath="$PROJECT_DIR$/WebComponents/validate.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Js_Framework_Library/angular/angular-sanitize.js" afterPath="$PROJECT_DIR$/Angular/Angular_Framrwork_demo/resource/js/angular-sanitize.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Js_Framework_Library/angular/angular-ui-router.js" afterPath="$PROJECT_DIR$/Angular/Angular_Framrwork_demo/resource/js/angular-ui-router.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Js_Framework_Library/angular/angular.js" afterPath="$PROJECT_DIR$/Angular/Angular_Framrwork_demo/resource/js/angular.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Js_Framework_Library/jq_jqUI/images/ui-bg_glass_55_fbf9ee_1x400.png" afterPath="$PROJECT_DIR$/Resource/Js/jq_jqUI/images/ui-bg_glass_55_fbf9ee_1x400.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Js_Framework_Library/jq_jqUI/images/ui-bg_glass_65_ffffff_1x400.png" afterPath="$PROJECT_DIR$/Resource/Js/jq_jqUI/images/ui-bg_glass_65_ffffff_1x400.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Js_Framework_Library/jq_jqUI/images/ui-bg_glass_75_dadada_1x400.png" afterPath="$PROJECT_DIR$/Resource/Js/jq_jqUI/images/ui-bg_glass_75_dadada_1x400.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Js_Framework_Library/jq_jqUI/images/ui-bg_glass_75_e6e6e6_1x400.png" afterPath="$PROJECT_DIR$/Resource/Js/jq_jqUI/images/ui-bg_glass_75_e6e6e6_1x400.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Js_Framework_Library/jq_jqUI/images/ui-bg_glass_95_fef1ec_1x400.png" afterPath="$PROJECT_DIR$/Resource/Js/jq_jqUI/images/ui-bg_glass_95_fef1ec_1x400.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Js_Framework_Library/jq_jqUI/images/ui-bg_highlight-soft_75_cccccc_1x100.png" afterPath="$PROJECT_DIR$/Resource/Js/jq_jqUI/images/ui-bg_highlight-soft_75_cccccc_1x100.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Js_Framework_Library/jq_jqUI/images/ui-icons_222222_256x240.png" afterPath="$PROJECT_DIR$/Resource/Js/jq_jqUI/images/ui-icons_222222_256x240.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Js_Framework_Library/jq_jqUI/images/ui-icons_2e83ff_256x240.png" afterPath="$PROJECT_DIR$/Resource/Js/jq_jqUI/images/ui-icons_2e83ff_256x240.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Js_Framework_Library/jq_jqUI/images/ui-icons_454545_256x240.png" afterPath="$PROJECT_DIR$/Resource/Js/jq_jqUI/images/ui-icons_454545_256x240.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Js_Framework_Library/jq_jqUI/images/ui-icons_888888_256x240.png" afterPath="$PROJECT_DIR$/Resource/Js/jq_jqUI/images/ui-icons_888888_256x240.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Js_Framework_Library/jq_jqUI/images/ui-icons_cd0a0a_256x240.png" afterPath="$PROJECT_DIR$/Resource/Js/jq_jqUI/images/ui-icons_cd0a0a_256x240.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Js_Framework_Library/jq_jqUI/jquery-1.11.2.min.js" afterPath="$PROJECT_DIR$/Resource/Js/jq_jqUI/jquery-1.11.2.min.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Js_Framework_Library/jq_jqUI/jquery-ui.min.css" afterPath="$PROJECT_DIR$/Resource/Js/jq_jqUI/jquery-ui.min.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Js_Framework_Library/jq_jqUI/jquery-ui.min.js" afterPath="$PROJECT_DIR$/Resource/Js/jq_jqUI/jquery-ui.min.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Js_Framework_Library/jq_jqUI/jquery.ui.datepicker-zh-CN.js" afterPath="$PROJECT_DIR$/Resource/Js/jq_jqUI/jquery.ui.datepicker-zh-CN.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="blog.iws" />
@@ -29,7 +72,7 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
     <favorites_list name="blog">
-      <favorite_root url="file://$PROJECT_DIR$/angular" module="blog" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+      <favorite_root url="file://$PROJECT_DIR$/Angular/Directives" module="blog" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
         <favorite_root url="file://$PROJECT_DIR$/angular/app.js" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
         <favorite_root url="file://$PROJECT_DIR$/angular/module" module="blog" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
           <favorite_root url="file://$PROJECT_DIR$/angular/module/m" module="blog" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
@@ -55,11 +98,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="data.json" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Controls/data.json">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Promise/introduce/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.21934758">
-              <caret line="13" column="30" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="30" />
+            <state vertical-scroll-proportion="0.32508436">
+              <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -164,7 +207,43 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Controls" />
+              <option name="myItemId" value="Angular" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Directives" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="blog" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="blog" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Angular" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="blog" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="blog" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Angular" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Angular_Framrwork_demo" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -190,11 +269,11 @@
       <recent name="D:\workSpace\blog\angular\directives" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Angular/Directives" />
+      <recent name="$PROJECT_DIR$/Resource" />
+      <recent name="$PROJECT_DIR$/Angular" />
       <recent name="D:\workSpace\blog\angular\module" />
       <recent name="D:\workSpace\blog\angular\directives" />
-      <recent name="D:\workSpace\blog\Js_Framework_Library\jq_jqUI" />
-      <recent name="D:\workSpace\blog\css_Framework_Library\bootstrap" />
-      <recent name="D:\workSpace\blog\front-end-Promise\code" />
     </key>
   </component>
   <component name="RunManager">
@@ -252,13 +331,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1440" y="23" width="1920" height="1057" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.120589785" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.120589785" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -290,15 +369,7 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Angular_Framrwork_demo/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Jq_dialog_datepick_demo/dialog.html">
+    <entry file="file://$PROJECT_DIR$/Resource/JqueryUI/dialog.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
@@ -314,7 +385,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Angular_Framrwork_demo/module/m/m.router.js">
+    <entry file="file://$PROJECT_DIR$/Angular/Angular_Framrwork_demo/module/m/m.router.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="11" column="18" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
@@ -330,7 +401,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Jq_dialog_datepick_demo/datepicker.html">
+    <entry file="file://$PROJECT_DIR$/Resource/JqueryUI/datepicker.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="8" column="89" selection-start-line="5" selection-start-column="3" selection-end-line="8" selection-end-column="89" />
@@ -338,7 +409,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Angular_Framrwork_demo/index.html">
+    <entry file="file://$PROJECT_DIR$/Angular/Angular_Framrwork_demo/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="4" column="19" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
@@ -346,7 +417,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Jq_dialog_datepick_demo/dialog.html">
+    <entry file="file://$PROJECT_DIR$/Resource/JqueryUI/dialog.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
@@ -362,7 +433,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Angular_Framrwork_demo/module/m/m.router.js">
+    <entry file="file://$PROJECT_DIR$/Angular/Angular_Framrwork_demo/module/m/m.router.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -378,7 +449,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Jq_dialog_datepick_demo/datepicker.html">
+    <entry file="file://$PROJECT_DIR$/Resource/JqueryUI/datepicker.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="8" column="89" selection-start-line="5" selection-start-column="3" selection-end-line="8" selection-end-column="89" />
@@ -386,7 +457,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Angular_Framrwork_demo/index.html">
+    <entry file="file://$PROJECT_DIR$/Angular/Angular_Framrwork_demo/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="4" column="19" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
@@ -394,7 +465,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Jq_dialog_datepick_demo/dialog.html">
+    <entry file="file://$PROJECT_DIR$/Resource/JqueryUI/dialog.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
@@ -418,7 +489,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Jq_dialog_datepick_demo/datepicker.html">
+    <entry file="file://$PROJECT_DIR$/Resource/JqueryUI/datepicker.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="8" column="89" selection-start-line="5" selection-start-column="3" selection-end-line="8" selection-end-column="89" />
@@ -426,7 +497,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Angular_Framrwork_demo/index.html">
+    <entry file="file://$PROJECT_DIR$/Angular/Angular_Framrwork_demo/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="4" column="19" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
@@ -434,7 +505,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Jq_dialog_datepick_demo/dialog.html">
+    <entry file="file://$PROJECT_DIR$/Resource/JqueryUI/dialog.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -442,7 +513,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Jq_dialog_datepick_demo/datepicker.html">
+    <entry file="file://$PROJECT_DIR$/Resource/JqueryUI/datepicker.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="8" column="89" selection-start-line="5" selection-start-column="3" selection-end-line="8" selection-end-column="89" />
@@ -496,7 +567,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Js_Framework_Library/angular/angular.js">
+    <entry file="file://$PROJECT_DIR$/Resource/Js/angular/angular.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.39829302">
           <caret line="14" column="55" selection-start-line="14" selection-start-column="55" selection-end-line="14" selection-end-column="55" />
@@ -510,105 +581,105 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Js_Framework_Library/angular/angular-ui-router.js">
+    <entry file="file://$PROJECT_DIR$/Resource/Js/angular/angular-ui-router.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.6827881">
           <caret line="12" column="40" selection-start-line="12" selection-start-column="40" selection-end-line="12" selection-end-column="40" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Angular_Framrwork_demo/services/s1.js">
+    <entry file="file://$PROJECT_DIR$/Angular/Angular_Framrwork_demo/services/s1.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.02793296">
           <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Angular_Framrwork_demo/directives/d/d.css">
+    <entry file="file://$PROJECT_DIR$/Angular/Angular_Framrwork_demo/directives/d/d.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Angular_Framrwork_demo/directives/d/d.directive.js">
+    <entry file="file://$PROJECT_DIR$/Angular/Angular_Framrwork_demo/directives/d/d.directive.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.41899443">
           <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Angular_Framrwork_demo/directives/d/d.html">
+    <entry file="file://$PROJECT_DIR$/Angular/Angular_Framrwork_demo/directives/d/d.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Angular_Framrwork_demo/module/m/m.css">
+    <entry file="file://$PROJECT_DIR$/Angular/Angular_Framrwork_demo/module/m/m.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Angular_Framrwork_demo/module/m/m.html">
+    <entry file="file://$PROJECT_DIR$/Angular/Angular_Framrwork_demo/module/m/m.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Angular_Framrwork_demo/module/m/m.controller.js">
+    <entry file="file://$PROJECT_DIR$/Angular/Angular_Framrwork_demo/module/m/m.controller.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.08534851">
           <caret line="3" column="20" selection-start-line="3" selection-start-column="15" selection-end-line="3" selection-end-column="20" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Angular_Framrwork_demo/app.css">
+    <entry file="file://$PROJECT_DIR$/Angular/Angular_Framrwork_demo/app.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Angular_Framrwork_demo/resource/js/angular.js">
+    <entry file="file://$PROJECT_DIR$/Angular/Angular_Framrwork_demo/resource/js/angular.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Angular_Framrwork_demo/app.js">
+    <entry file="file://$PROJECT_DIR$/Angular/Angular_Framrwork_demo/app.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33519554">
           <caret line="14" column="41" selection-start-line="14" selection-start-column="41" selection-end-line="14" selection-end-column="41" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Angular_Framrwork_demo/resource/js/angular-ui-router.js">
+    <entry file="file://$PROJECT_DIR$/Angular/Angular_Framrwork_demo/resource/js/angular-ui-router.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Js_Framework_Library/jq_jqUI/jquery.ui.datepicker-zh-CN.js">
+    <entry file="file://$PROJECT_DIR$/Resource/Js/jq_jqUI/jquery.ui.datepicker-zh-CN.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Js_Framework_Library/jq_jqUI/jquery-ui.min.css">
+    <entry file="file://$PROJECT_DIR$/Resource/Js/jq_jqUI/jquery-ui.min.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Jq_dialog_datepick_demo/datepicker.html">
+    <entry file="file://$PROJECT_DIR$/Resource/JqueryUI/datepicker.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.13498312">
           <caret line="8" column="89" selection-start-line="5" selection-start-column="3" selection-end-line="8" selection-end-column="89" />
@@ -616,18 +687,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Jq_dialog_datepick_demo/dialog.html">
+    <entry file="file://$PROJECT_DIR$/Resource/JqueryUI/dialog.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.21934758">
           <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Promise/introduce/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6119235">
-          <caret line="39" column="28" selection-start-line="39" selection-start-column="28" selection-end-line="39" selection-end-column="28" />
           <folding />
         </state>
       </provider>
@@ -640,7 +703,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Angular_Framrwork_demo/module/m/m.router.js">
+    <entry file="file://$PROJECT_DIR$/Angular/Angular_Framrwork_demo/module/m/m.router.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.18072289">
           <caret line="11" column="18" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
@@ -648,7 +711,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Angular_Framrwork_demo/index.html">
+    <entry file="file://$PROJECT_DIR$/Angular/Angular_Framrwork_demo/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.15185602">
           <caret line="9" column="18" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
@@ -656,10 +719,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Controls/data.json">
+    <entry file="file://$PROJECT_DIR$/WebComponents/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21934758">
-          <caret line="13" column="30" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="30" />
+        <state vertical-scroll-proportion="0.26996624">
+          <caret line="16" column="46" selection-start-line="16" selection-start-column="46" selection-end-line="16" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebComponents/data.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.26996624">
+          <caret line="16" column="20" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Observer/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.35433072">
+          <caret line="21" column="31" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Angular/AngularKnowledgePoint/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.23622048">
+          <caret line="14" column="9" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Promise/introduce/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.32508436">
+          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
           <folding />
         </state>
       </provider>

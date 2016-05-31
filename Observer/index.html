@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <input id="txt1" type="text" />
+    <input id="txt2" type="text" />
+    <input id="txt3" type="text" />
+    <input id="txt4" type="text" />
+</body>
+</html>
+
+<script>
+    var Valobj = function(option){
+
+        this.name = option.name;
+
+        this.value = "";
+
+        this._observerArr = [];
+        this._keyArr = [];
+
+        this.setValue = function(value){
+            this.value = value;
+
+            this.update();
+        }
+
+        this.registerObserver = function(observer){
+            this._observerArr.push(observer);
+        }
+
+        this.unRegisterObserver = function(observer){
+            for(var i=0;i<this._observerArr.length;i++){
+                if(this._observerArr[i].id == observer.id){
+                    this._observerArr.splice(i,1);
+                    break;
+                }
+            }
+        }
+
+        this.setParams = function(key, obj){
+            this._keyArr.push(key);
+            this.registerObserver(obj);
+        }
+
+        this.calc = function(){
+
+        }
+
+        this.update = function(){
+            for(var i=0;i<this._observerArr.length;i++){
+
+                console.log(this.name + "通知" + this._observerArr[i].name + "重新计算!");
+
+                this._observerArr[i].setValue(this._observerArr[i].value);
+            }
+        }
+    }
+
+    var o1 = new Valobj({name:"txt1"});
+    var o2 = new Valobj({name:"txt2"});
+    var o3 = new Valobj({name:"txt3"});
+    var o4 = new Valobj({name:"txt4"});
+
+    o1.setParams("A",o3);
+    o2.setParams("B",o3);
+    o3.setParams("C",o4);
+
+    document.querySelector("#txt1").addEventListener("blur",function(){
+        o1.setValue(this.value);
+    },false);
+
+    document.querySelector("#txt2").addEventListener("blur",function(){
+        o2.setValue(this.value);
+    },false);
+
+    document.querySelector("#txt3").addEventListener("blur",function(){
+        o3.setValue(this.value);
+    },false);
+</script>

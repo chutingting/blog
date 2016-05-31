@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css" rel="stylesheet">
+        a{
+            text-decoration: underline;
+        }
+        pre{
+            margin-left: -60px;
+        }
+        .blue{
+            color: sandybrown;
+        }
+        .red{
+            color:red;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center">
+        Angular 1.x知识点介绍
+    </h1>
+
+    <a>1:双向绑定</a>
+    <a>2:依赖注入</a>
+    <a>3:指令</a>
+    <a>4:服务</a>
+    <a>5:广播事件</a>
+
+    <div>
+        <h3>angular的双向绑定</h3>
+        <p>angular的双向绑定,就是UI操作能够反映到data,数据操作能返回到UI</p>
+
+        <h3>$watch list</h3>
+        <p>首先要介绍的是$watch 队列, 每次绑定一些东西到UI模型上面的时候, 都会往$watch队列里面插入一条$watch, 可以理解为有多少个ng标识就有多少个$watch(函数除外,一般函数是不会变化的!)</p>
+        <p>$watch是当模板加载完毕,也就是在linking阶段的时候(Angular分为compile阶段和linking阶段), angular解释器会寻找每个directive, 然后生成每个$watch</p>
+
+        <h3>$digest</h3>
+        <p>首先要介绍浏览器的事件机制, 浏览器一直在等待事件的发生, 比如用户操作, 假如点击了一个按钮或者输入框输入了东西, 事件的回调函数会在JavaScript里面执行</p>
+        <p>然后我们就可以做任何DOM操作了, 等回调函数执行完毕后, 浏览器就会对应的对DOM做出变化</p>
+        <p>angular拓展了这个事件循环, 生成了一个angular context的执行环境</p>
+        <p>$scope.name = "aaa" ----> Click Event ---->$scope.name = "bbb";</p>
+        <p>当执行Click Event的时候, 浏览器接收到了一个事件, 进入angular context</p>
+        <p>$digest循环开始执行, 查询每个$watch是否变化</p>
+        <p>由于监视$scope.name的$watch报告了变化, 它会强制在执行一次$digest循环(处理变量的相互引用), 直到$digest循环没有检测到变化.</p>
+        <p>浏览器拿回控制权, 更新与$scope.name新值相应部分的DOM</p>
+        <h4>这里很重要的一个概念是: 每进入一个angular context的事件都会执行一个$digest循环, 也就是每次我们输入一个字母,$digest循环都会检查页面上面的每一个$watch</h4>
+
+        <h3>dirty-checking</h3>
+        <p>当进入到angular context环境以后, $digest循环被触发, 这个循环由2个更小的循环组成, evalAsync和$watch</p>
+        <p>所有的$watch都检查完了, 就要问有没有$watch被更新过, 如果有, 继续循环直到所有model不会再发生变化.</p>
+        <p>如果循环超过了10次, 直接异常</p>
+        <h4>dirty-checking很慢, 其实这是错的, 它像闪电一样快, 但是如果模板里面有成千上万个watch, 那你就走远了.</h4>
+        <h3>$apply</h3>
+        <p>当事件被触发时, angular会帮忙调用$apply, 会进入到angular context, 比如有个输入框 ng-model="aaa", 输入f的时候, 实际上是 $apply("aaa = 'f';")</p>
+        <p>什么时候不会自动触发$apply, 当事件绑定在jq元素上面的时候, 对scope的处理, 是不会进入到angular的执行环境angular context里面的, 也就是永远不会执行$digest</p>
+    </div>
+
+    <div style="display: none;">
+        <h3>Angular的依赖注入</h3>
+        <p>angular里面的依赖注入是非常有用的, 这里的套路是先声明在注入</p>
+
+        <h4>Provider服务($provide)</h4>
+        <p>angular里面有一个对象叫$provide, 服务可以通过该对象的$provide.provider来定义, 比如</p>
+        <pre>
+            app.config(function($provide) {
+                $provide.provider("key",function(){
+                    this.$get = function(){
+                        return function(name){
+                            console.log(name);
+                        }
+                    }
+                })
+            })
+        </pre>
+        <p>我们定义了一个名字为key的provider, 他返回的是一个函数, 我们可以在任何能被注入地方(比如控制器)里面调用这个名字为key的provider</p>
+        <p>当发现名字为key的provider后, 会主动去调用provider的$get方法, 这样就可以使用了.</p>
+        <pre>
+            app.factory("a",function(key) {
+                key("name111");
+            })
+        </pre>
+        <h4>注入器($injector)</h4>
+        <p>注入器负责把我们通过$provide创建的服务注入到需要注入的地方.</p>
+        <p>angular程序只有一个$injector, 该注入器在程序启动的时候就被创建出来</p>
+        <p>如何注入:</p>
+        <pre>
+            var _key = $injector.get('key');
+            _key('injector done!');
+            </pre>
+        <p>注入器也可以通过invoke来注入服务</p>
+        <pre>
+            var myFunction = function(key) {
+              key('aaaa');
+            };
+            $injector.invoke(myFunction);
+        </pre>
+
+        <h4>配置provider</h4>
+        <p>angular分两个阶段运行你的应用 – config阶段和run阶段, 在angular的config阶段, 只有$provide和$injector能够被注入.</p>
+        <p>我们经常看到的$controllerProvider或者$httpProvide等, 都是angular的基础对象, 可以通过重写当前$provide的一些方法来达到配置的目的.</p>
+        <p>比如我们设置angular的$http对象, 处理ajax请求的时候有缓存的问题, 不需要到每个http请求里面去做, 在全局配置阶段里面处理即可.</p>
+        <pre>
+            $httpProvider.defaults.headers.get['Cache-Control'] = 'no-cache';
+            $httpProvider.defaults.headers.get['Pragma'] = 'no-cache';
+        </pre>
+        <p>一般情况的写法:</p>
+        <pre>
+            app.provider('dbService', function dbServiceProvider() {
+                this.$get= ['dbhost',function dbServiceFactory(dbhost){
+                    return new DbService(dbhost);
+                }]
+            });
+            function DbService(dbhost){
+                this.url = dbhost;
+                this.add = function(){}
+            }
+            app.controller('appCtrl',function(DbService){
+                DbService.add();
+            });
+        </pre>
+        <p>也可以通过声明factory或者service来返回一个对象, 然后$injector注入到目的地</p>
+        <pre>
+            angular.module('MyServiceModule', []).factory('notify', [function (win) {
+                return function (msg) {
+                    console.log(msg);
+                };
+            }]);
+
+            function myController(scope, notifyService) {
+                scope.callNotify = function (msg) {
+                    notifyService(msg);
+                };
+            }
+
+            myController.$inject = ['$scope', 'notify'];
+        </pre>
+    </div>
+
+    <div style="display: none;" >
+        <h3>directive</h3>
+        <p class="red">个人认为指令是angular里面最强大的功能,没有之一.</p>
+        <p>angularjs里的指令允许你创建非常语义化以及高度重用的组件,<b class="red">可以理解为web components的先驱者</b>.</p>
+        <pre>
+            angular.module("xx").directive("directiveKey",function(){
+                return {
+                    templateUrl:'xxx.html',
+                    restrict:'EA', //ECMA
+                    scope:{
+                        data:"="
+                    },
+                    link:function($scope,element,attrs){},
+                    controller:function($scope){}
+                }
+            })
+        </pre>
+        <p class="blue">声明一个指令需要注意的参数:</p>
+        <p>templateUrl:  当前指令的View视图地址</p>
+        <p>restrict: 当前HTML的属性或者标签, 一般情况写EA没问题, E表示Element, A代表Attribute</p>
+        <p class="blue">scope: 一般情况分为2种状态, 1: 当前指令没有自己独立的作用域, 他的作用域完全继承于父节点的scope 2:作用域完全独立, 只是属于当前父节点, 没有继承关系.</p>
+        <p class="blue">scope 等于 '=' 的时候表示双向绑定, 等于 '@' 的时候表示单向绑定 </p>
+        <h4>link和compile只允许存在一个</h4>
+        <h4 class="blue">link:</h4>
+        <p>A:function link(scope, element, attrs, controller) { ... }</p>
+        <p>在link阶段要执行的函数，这个属性只有当compile属性没有设置时才生效</p>
+        <p>常用参数为scope，element和attrs，分别是当前元素所在的scope，dom元素和元素上的属性们</p>
+        <p>directive基本上都会这个函数，一般情况就是绑定scope和注册事件</p>
+        <h4 class="blue">compile</h4>
+        <p>function compile(element, attrs, transclude) { ... }</p>
+        <p>在当前directive显示出来之前的一个编译过程, 这里可以改变HTML DOM结构. <b class="red">当前指令的编译过程只会执行一次(不管这个指令被引用了多少次)</b></p>
+        <p>较少使用，因为大部分directive是处理dom元素的行为绑定，而不是改变它们</p>
+        <h4 class="blue">controller</h4>
+        <p>控制器.</p>
+
+        <h3>指令和当前controller如何通信</h3>
+        <p>推荐使用callback的形式, 而不是通过$broadcast来广播事件</p>
+        <p>使用 $rootScope.$broadcast的时候一定要注意手动在页面上面手动销毁(以下是代码), 不然肯定会造成内存泄露导致一些奇奇怪怪的问题.</p>
+        <pre>
+            var cleanUpFunc = $rootScope.$on('xxx', function {});
+            $scope.$on('$destroy', function() {
+                cleanUpFunc();
+            });
+        </pre>
+        <h4>如何使用callback</h4>
+        <pre>
+            angular.module("myDirective").directive("directiveKey",function(){
+                return {
+                    templateUrl:'xxx.html',
+                    restrict:'EA', //ECMA
+                    scope:{
+                        data:"=",
+                        callback:"="
+                    },
+                    link:function($scope,element,attrs){},
+                    controller:function($scope){
+                        $scope.uClick = function(){
+                            $scope.callback($scope.data);
+                        }
+                    }
+                }
+            })
+        </pre>
+        <p>当前页面的UI</p>
+        <pre>
+            <my-directive data="xxx" call-back="callbackFun"></my-directive>
+            controller:
+            $scope.callbackFun = function(valueFromDirective){
+                console.log(valueFromDirective);
+            }
+        </pre>
+    </div>
+
+    <div style="display: none;">
+        <h3>服务</h3>
+        <p>服务和工厂差不多, 都是处理数据的地方, 可以理解为模具, 给不一样的数据, 按照一样的处理流程返回对应的结果.</p>
+        <pre>
+            angular.module("ionicApp").factory("dataTool",function(){
+                var dataCooke = function(){
+                    this.name ="xxx";
+                    this.setName = function(name){
+                        this.name = name;
+                    }
+                }
+                return new dataCooke();
+            })
+        </pre>
+        <p>具体怎么使用和注入, 看依赖注入部分.</p>
+    </div>
+
+    <div style="display: none;">
+        <h3>广播事件</h3>
+        <p>一般情况是controller通知当前directive 来使用$broadcast</p>
+        <p>而directive和当前controller通信则推荐使用callback的形式</p>
+        <p>在同级的controller之间通信的情况, 可以使用 $rootScope.$broadcast来主动发送通知, 但是一定要加上$scope.$on("$destroy")来销毁</p>
+        <p>以上几种方法可以解决95%的问题, 当然也可以使用watch来监听, 但是这并不是一个好主意. :( </p>
+
+        <p>angular少用$rootScope.$broadcast以及watch.</p>
+        <p>一般情况我们都是可以搞定的</p>
+    </div>
+</body>
+</html>
+<script>
+    var alist = document.querySelectorAll("a");
+    var dlist = document.querySelectorAll("div");
+    function hideAllDiv(){
+        for(var j=0;j<dlist.length;j++){
+            dlist[j].style.display = "none";
+        }
+    }
+    for(var i=0;i<alist.length;i++){
+        (function(index){
+            alist[index].onclick = function(){
+                hideAllDiv();
+                dlist[index].style.display = "block";
+            }
+        })(i);
+    }
+</script>
