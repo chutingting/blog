@@ -1,0 +1,33 @@
+
+
+
+{
+  "checkboxList":[
+    {"name":"c1","value":"1"},
+    {"name":"c2","value":"2"},
+    {"name":"c3","value":"3"},
+    {"name":"c4","value":"4"}
+  ],
+  "selectRemoteList":[
+    {"name":"s1","value":"1"},
+    {"name":"s2","value":"2"},
+    {"name":"s3","value":"3"},
+    {"name":"s4","value":"4"}
+  ],
+  "selectCheckbox":[
+    {"name":"sc1","value":"1"},
+    {"name":"sc2","value":"2"},
+    {"name":"sc3","value":"3"},
+    {"name":"sc4","value":"4"}
+  ],
+  "ajaxPaging":{
+    "pageTotalNum":"3","totalCount":"6","data":[
+      {"name":"1","val":"11"},
+      {"name":"2","val":"22"},
+      {"name":"3","val":"33"},
+      {"name":"4","val":"44"},
+      {"name":"5","val":"55"},
+      {"name":"6","val":"66"}
+    ]
+  }
+}

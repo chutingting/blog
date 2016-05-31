@@ -1,0 +1,77 @@
+
+
+<template id="selectremote_template">
+    <style>
+        ::content{
+
+        }
+    </style>
+
+    <div id="sre"></div>
+</template>
+
+<script>
+    (function(){
+        var selectremote_doc = document.currentScript.ownerDocument;
+
+        var selectremote_proto = Object.create(HTMLElement.prototype);
+
+        var selectremoteRoot = null;
+
+        var changeHandle = null;
+
+        selectremote_proto.createdCallback = function(){
+
+            var temp = selectremote_doc.querySelector("#selectremote_template");
+
+            selectremoteRoot = this.createShadowRoot();
+
+            var that = this;
+
+            var url = this.getAttribute("url");
+
+            if(url){
+                var displayName = this.getAttribute("displayName");
+                var displayValue = this.getAttribute("displayValue");
+
+                $.ajax({
+                    type:"get",
+                    url:url,
+                    dateType:"json",
+                    success:function(d){
+                        var val = d.selectRemoteList;
+
+                        var html = "<select><option value=''>全部</option>";
+                        for(var i=0;i<val.length;i++){
+                            html += "<option value='"+val[i][displayValue]+"'>"+val[i][displayName]+"</option>";
+                        }
+
+                        html += "</select>";
+
+                        $(temp.content.querySelector("#sre")).append($(html));
+
+                        var clone = document.importNode(temp.content,true);
+
+                        selectremoteRoot.appendChild(clone);
+
+                        $(selectremoteRoot.querySelector("select")).change(function(e){
+                            that.change(e, val, that.getValue());
+                        })
+                    }
+                })
+            }else{
+                console.log("url未配置!");
+            }
+        }
+
+        selectremote_proto.getValue = function(){
+            return $(selectremoteRoot.querySelector("select")).val();
+        }
+
+        selectremote_proto.setValue = function(val){
+            $(selectremoteRoot.querySelector("select")).val(val);
+        }
+
+        document.registerElement("select-remote",{prototype:selectremote_proto});
+    })();
+</script>

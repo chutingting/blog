@@ -1,0 +1,83 @@
+
+<template>
+    <style>
+        #dragMe{
+            width: 300px;
+            height: 300px;
+            border: 1px solid #CCCCCC;
+        }
+        #dragMe img{
+            width: 300px;
+            height: 300px;
+        }
+    </style>
+    <div id="dragMe" draggable="true"></div>
+</template>
+
+<script>
+    (function(){
+
+        var root = null;
+        var dragEl = null;
+        var callback = null;
+        var isImg = false;
+
+        var doc = document.currentScript.ownerDocument;
+        var proto = Object.create(HTMLElement.prototype);
+
+        proto.createdCallback = function(){
+
+            callback = this.getAttribute("callback");
+            isImg = this.getAttribute("isImg")?true:false;
+
+            if(!callback){
+                alert("必须配置callback属性!");
+                return;
+            }
+
+            var temp = doc.querySelector("template");
+            root = this.createShadowRoot();
+
+            var clone = document.importNode(temp.content,true);
+            root.appendChild(clone);
+
+            dragEl = root.querySelector("#dragMe");
+
+            regEvent();
+        }
+
+        function regEvent(){
+            dragEl.addEventListener("dragstart",function(){},false);
+            dragEl.addEventListener("drop",drop,false);
+            dragEl.addEventListener("dragover",function(e){
+                e.stopPropagation();
+                e.preventDefault();
+            },false);
+        }
+
+        function drop(e){
+            e.stopPropagation();
+            e.preventDefault();
+
+            var fileList = e.dataTransfer.files;
+            var oImg = document.createElement("img");
+            var render = new FileReader();
+
+            render.onerror = function(){
+                window[callback]({rc:false,data:"读取文件失败!"});
+            }
+
+            render.onload = function(){
+                window[callback]({rc:true,data:this});
+            }
+
+            if(isImg){
+                render.readAsDataURL(fileList[0]);
+            }else{
+                render.readAsBinaryString(fileList[0]);
+            }
+        }
+
+        document.registerElement("drag-file",{prototype:proto});
+    })();
+</script>

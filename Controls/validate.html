@@ -1,0 +1,214 @@
+
+
+<template id="errorStringTemplate"></template>
+
+<script>
+
+    var BaseValidate = function(option){
+        this.id = option.id?option.id:Math.ceil(Math.random()*100000);
+        this.val = "";
+
+        this.required = option.required?option.required:false;
+        this.validate = false;
+
+        this.setValue = function(val){
+            this.val = val;
+        }
+    }
+
+    var StringValidate = function(option){
+
+        function checkSpecial(val){
+            var vals = ['!','@','#','%','^','&'];
+            var bl = true;
+            for(var i=0;i<vals.length;i++){
+                if(val.indexOf(vals[i]) != -1){
+                    bl = false;
+                    break;
+                }
+            }
+            return bl;
+        }
+
+        BaseValidate.apply(this,arguments);
+        this.type = "string";
+
+        this.allowSpecial = option.allowSpecial?option.allowSpecial:false;
+
+        this.checking = function(){
+            if(this.required){
+                if(this.val == ""){
+                    this.validate = false;
+                }else{
+                    if(this.allowSpecial){
+                        this.validate = checkSpecial(this.val);
+                    }else{
+                        this.validate = true;
+                    }
+                }
+            }else if(this.allowSpecial){
+                this.validate = checkSpecial(this.val);
+            }else{
+                this.validate = true;
+            }
+
+            return this.validate;
+        }
+    }
+
+    var DateValidate = function(option){
+        BaseValidate.apply(this,arguments);
+
+        this.type = "date";
+
+        this.beginDate = option.beginDate?option.beginDate:"";
+        this.endDate = option.endDate?option.endDate:"";
+
+        this.checking = function(){
+            if(!this.beginDate && !this.endDate){
+                this.validate = false;
+            }
+            var val = new Date(this.val.replace(/-/g,"/"));
+            if(this.beginDate){
+                var begin = new Date(this.beginDate.replace(/-/g,"/"));
+                if(val < begin){
+                    this.validate = false;
+                }else{
+                    this.validate = true;
+                }
+            }
+            if(this.endDate){
+                var end = new Date(this.endDate.replace(/-/g,"/"));
+
+                if(val > end){
+                    this.validate = false;
+                }else{
+                    this.validate = true;
+                }
+            }
+            return this.validate;
+        }
+    }
+
+    function getErrorMsgElement(){
+        var list = document.querySelectorAll("error-msg");
+        if(list.length != 1){
+
+            for(var i=0;i<list.length;i++){
+                list[i].remove(0);
+            }
+
+            var errMsg = document.createElement("error-msg");
+            document.body.appendChild(errMsg);
+            return errMsg;
+        }else{
+            return list[0];
+        }
+    }
+
+    //一般输入框，控制不允许为空, 特殊字符, 可配置错误信息
+    (function(){
+        var input_string_proto = Object.create(HTMLInputElement.prototype);
+
+        input_string_proto.validateStatus = false;
+        input_string_proto.errorMsg = "";
+
+        input_string_proto.createdCallback = function(){
+
+            var that = this;
+
+            var errMsg = getErrorMsgElement();
+
+            this.setAttribute("type","text");
+
+            var required = this.getAttribute("required") == "true"?true:false;
+            var allowSpecial = this.getAttribute("special") == "true"?true:false;
+            var _errorMsg = this.getAttribute("errorMsg");
+
+            if(required || allowSpecial){
+                if(!_errorMsg){
+                    alert("必须配置错误提示语!");
+                    this.validateStatus = false;
+                    this.errorMsg = "必须配置错误提示语!";
+                    return;
+                }
+            }
+
+            var _sv = new StringValidate({required:required,allowSpecial:allowSpecial});
+
+            this.addEventListener("blur",function(){
+                _sv.setValue(this.value);
+                var ck = _sv.checking();
+                if(!ck){
+                    this.style.border = "1px solid red";
+                    errMsg.setValue(_errorMsg).show();
+                    that.validateStatus = false;
+                    that.errorMsg = _errorMsg;
+                }else{
+                    this.style.border = "1px solid #cccccc";
+                    errMsg.hide();
+                    that.validateStatus = true;
+                    that.errorMsg = "";
+                }
+                console.log(ck);
+            },false);
+        }
+
+        document.registerElement("input-string",{prototype:input_string_proto,extends: 'input'});
+    })();
+
+    //日期输入框, 自己控制开始时间和结束时间
+    (function(){
+        var input_date_proto = Object.create(HTMLInputElement.prototype);
+
+        input_date_proto.validateStatus = false;
+        input_date_proto.errorMsg = "";
+
+        input_date_proto.createdCallback = function(){
+
+            var that = this;
+
+            var errMsg = getErrorMsgElement();
+
+            this.setAttribute("type","date");
+
+            var beginDate = this.getAttribute("beginDate");
+            var endDate = this.getAttribute("endDate");
+            var _errorMsg = this.getAttribute("errorMsg");
+
+            if(beginDate || endDate){
+                if(!_errorMsg){
+                    alert("必须配置错误提示语!");
+                    this.validateStatus = false;
+                    this.errorMsg = "必须配置错误提示语!";
+                    return;
+                }
+            }
+
+            var val = this.value;
+
+            var _sd = new DateValidate({beginDate:beginDate,endDate:endDate});
+            this.addEventListener("change",function(){
+                _sd.setValue(this.value);
+                var ck = _sd.checking();
+                if(!ck){
+                    this.style.border = "1px solid red";
+                    errMsg.setValue(_errorMsg).show();
+                    that.validateStatus = false;
+                    that.errorMsg = _errorMsg;
+
+                    this.value = "";
+
+                }else{
+                    this.style.border = "1px solid #cccccc";
+                    errMsg.hide();
+                    that.validateStatus = true;
+                    that.errorMsg = "";
+                }
+                console.log(ck);
+            },false);
+        }
+
+        document.registerElement("input-date",{prototype:input_date_proto,extends: 'input'});
+    })();
+</script>

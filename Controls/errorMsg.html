@@ -1,0 +1,74 @@
+
+
+<template>
+    <style>
+        *{margin: 0; padding: 0; font-family: "Microsoft yahei"; font-size: 12px;}
+        .msg{position: fixed; top:0; width: 100%; text-align: center; -webkit-transform: translateY(-100%); opacity: 0;}
+        .msg span{display: inline-block; padding: 10px 30px; line-height: 30px; color: #000; background-color: #79D2C5;}
+        .msg.in{-webkit-animation: showmag 3s linear;}
+
+        @-webkit-keyframes showmag{
+            0%{-webkit-transform: translateY(-100%); opacity: 0;}
+            10%{-webkit-transform: translateY(0); opacity: 1;}
+            90%{-webkit-transform: translateY(0); opacity: 1;}
+            100%{-webkit-transform: translateY(-100%); opacity: 0;}
+        }
+    </style>
+    <div id="errorMsgContainer" class="msg">
+        <span id="errorMsg"></span>
+    </div>
+</template>
+
+<script>
+
+    (function(){
+
+        var this_doc = document.currentScript.ownerDocument;
+        var this_proto = Object.create(HTMLElement.prototype);
+        var root = null;
+
+        var dc = null;
+        var em = null;
+
+        this_proto.createdCallback = function(){
+
+            var tmp = this_doc.querySelector("template");
+
+            root = this.createShadowRoot();
+            var clone = document.importNode(tmp.content,true);
+            root.appendChild(clone);
+
+            dc = root.querySelector("#errorMsgContainer");
+            em = root.querySelector("#errorMsg");
+
+            dc.addEventListener("webkitAnimationEnd",function(){
+                this.setAttribute("class","msg");
+            },false);
+        }
+
+        this_proto.setValue = function(val){
+            em.innerText = val;
+            return this;
+        }
+
+        this_proto.show = function(){
+            dc.style.display = "block";
+            if(dc.getAttribute("class").indexOf('in') != -1){
+                dc.setAttribute("class","msg");
+            }
+
+            if(dc.getAttribute("class").indexOf('in') == -1){
+                dc.setAttribute("class","msg in");
+            }
+            return this;
+        }
+
+        this_proto.hide = function(){
+            dc.style.display = "none";
+            return this;
+        }
+
+        document.registerElement("error-msg",{prototype:this_proto});
+    })();
+
+</script>

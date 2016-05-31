@@ -1,0 +1,129 @@
+
+
+<template>
+    <style type="text/css">
+        .red{
+            color:red;
+        }
+    </style>
+    共<span class="red" id="totalProCount"></span>条
+    <input type="button" value="上一页" id="prev"/>
+    <input type="button" value="下一页" id="next" />
+    当前第<span class="red" id="currentIndex"></span>/<span class="red" id="allPages"></span>页
+    到<input type="text" style="width:20px" class="mb20" id="enterIndex"/>页
+    <input type="button" value="确定" id="doSearch"/>
+</template>
+
+<script>
+    (function(){
+        var doc = document.currentScript.ownerDocument;
+        var proto = Object.create(HTMLElement.prototype);
+
+        var root = null;
+        var prevEl = null;
+        var nextEl = null;
+        var totalProCountEl = null;
+        var currentIndexEl = null;
+        var allPagesEl = null;
+        var enterIndexEl = null;
+        var doSearchEl = null;
+
+        var url = {url:""};
+
+        var pageIndex = 0;
+        var pageSize = 0;
+        var callback = null;
+
+        proto.createdCallback = function(){
+            var temp = doc.querySelector("template");
+            root = this.createShadowRoot();
+
+            var clone = document.importNode(temp.content,true);
+            root.appendChild(clone);
+
+            prevEl = root.querySelector("#prev");
+            nextEl = root.querySelector("#next");
+            totalProCountEl = root.querySelector("#totalProCount");
+            currentIndexEl = root.querySelector("#currentIndex");
+            allPagesEl = root.querySelector("#allPages");
+            enterIndexEl = root.querySelector("#enterIndex");
+            doSearchEl = root.querySelector("#doSearch");
+
+            url.url = this.getAttribute("url");
+            pageIndex = this.getAttribute("pageIndex")?this.getAttribute("pageIndex"):0;
+            pageSize = this.getAttribute("pageSize")?this.getAttribute("pageSize"):10;
+            callback = this.getAttribute("callback");
+
+            if(!url.url){
+                alert("分页组件的url请求地址必须配置!");
+                return;
+            }
+            if(!callback){
+                alert("分页组件的回调函数必须配置");
+                return;
+            }
+
+            loadData(url.url);
+
+            regEvent();
+        }
+
+        proto.setUrl = function(val){
+            pageIndex = 1;
+            url.url = val;
+            return this;
+        }
+
+        proto.search = function(){
+            loadData(url.url);
+        }
+
+        function loadData(url){
+            var _url = url;
+            if(_url.indexOf('?') == -1){
+                _url += "?pageIndex="+pageIndex+"&pageSize="+pageSize;
+            }else{
+                _url += "&pageIndex="+pageIndex+"&pageSize="+pageSize;
+            }
+            $.ajax({
+                url:_url,
+                success:function(d){
+                    d = d.ajaxPaging;
+                    totalProCountEl.innerText = d.totalCount;
+                    allPagesEl.innerText = d.pageTotalNum;
+                    currentIndexEl.innerText = pageIndex;
+
+                    window[callback](d.data);
+                }
+            })
+        }
+
+        function regEvent(){
+            prevEl.addEventListener("click",function(){
+                if(pageIndex == 1){
+                    return;
+                }
+                pageIndex--;
+                loadData(url.url);
+            },false);
+            nextEl.addEventListener("click",function(){
+                if(pageIndex == parseInt(allPagesEl.innerText)){
+                    return;
+                }
+                pageIndex++;
+                loadData(url.url);
+            },false);
+            doSearchEl.addEventListener("click",function(){
+                var val  = parseInt(enterIndexEl.value);
+                if(isNaN(val) || val > parseInt(allPagesEl.innerText) || val < 1 ){
+                    alert("请输入小于总页数的正整数!");
+                    return;
+                }
+                pageIndex = val;
+                loadData(url.url);
+            },false);
+        }
+
+        document.registerElement("list-paging",{prototype:proto});
+    })();
+</script>

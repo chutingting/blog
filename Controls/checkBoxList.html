@@ -1,0 +1,110 @@
+
+<template id="checckboxlist_template">
+    <style>
+        ::content{
+            border: 1px solid red;
+        }
+    </style>
+
+    <div id="cbs"></div>
+</template>
+
+<script>
+
+    (function(){
+        var checkboxlist_doc = document.currentScript.ownerDocument;
+
+        var checkboxListProto = Object.create(HTMLElement.prototype);
+
+        var checkboxListRoot = null;
+
+        checkboxListProto.createdCallback = function(){
+
+            var temp = checkboxlist_doc.querySelector("#checckboxlist_template");
+
+            checkboxListRoot = this.createShadowRoot();
+
+            var remote = this.getAttribute("remote");
+
+            if(remote == "true"){
+                var url = this.getAttribute("url");
+                if(url){
+                    var displayName = this.getAttribute("displayName");
+                    var displayValue = this.getAttribute("displayValue");
+                    $.ajax({
+                        type:"get",
+                        url:url,
+                        dateType:"json",
+                        success:function(d){
+                            var val = d.checkboxList;
+
+                            var html = "";
+                            for(var i=0;i<val.length;i++){
+                                html += "<lable>"+val[i][displayName]+"</lable>:<input value='"+val[i][displayValue]+"' type='checkbox'/>";
+                            }
+
+                            $(temp.content.querySelector("#cbs")).append($(html));
+
+                            var clone = document.importNode(temp.content,true);
+
+                            checkboxListRoot.appendChild(clone);
+                        }
+                    })
+                }else{
+                    alert("未配置URL属性!");
+                }
+            }else{
+                var children = this.querySelector("section");
+
+                temp.content.querySelector("#cbs").appendChild(children);
+
+                var clone = document.importNode(temp.content,true);
+
+                checkboxListRoot.appendChild(clone);
+            }
+        }
+
+        checkboxListProto.getValue = function(){
+            var list = checkboxListRoot.querySelectorAll("input[type=checkbox]");
+
+            var arr = [];
+            for(var i=0;i<list.length;i++){
+                if(list[i].checked){
+                    arr.push(list[i].getAttribute("value"));
+                }
+            }
+            return arr;
+        }
+
+        checkboxListProto.setCheckboxStatus = function(arr){
+            var list = checkboxListRoot.querySelectorAll("input[type=checkbox]");
+
+            this.setAllStatus(false);
+
+            for(var k=0;k<list.length;k++){
+                var exist = false;
+                for(var i=0;i<arr.length;i++){
+                    if(arr[i] == list[k].getAttribute("value")){
+                        exist = true;
+                        break;
+                    }
+                }
+                if(exist){
+                    list[k].checked = true;
+                }
+            }
+            return list;
+        }
+
+        checkboxListProto.setAllStatus = function(tag){
+
+            var list = checkboxListRoot.querySelectorAll("input[type=checkbox]");
+
+            for(var k=0;k<list.length;k++){
+                list[k].checked = tag;
+            }
+        }
+
+        document.registerElement("checkbox-list",{prototype:checkboxListProto});
+    })();
+</script>

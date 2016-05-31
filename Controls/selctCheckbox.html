@@ -1,0 +1,291 @@
+
+
+<template id="selCkTemplate">
+    <style>
+        .c{
+            display: none;
+            position: absolute;
+        }
+    </style>
+
+    <div class="c">
+        <span id="result" style="padding-left:2px;border: none;display: inline-block;"></span>
+        <div style="margin-top: 5px"><input type="text" id="sText" placeholder="enter..." /></div>
+        <div id="listContainer"></div>
+    </div>
+</template>
+
+<script>
+
+    (function(){
+        var select_checkbox_ctrl = {
+            getAbsoluteLeft:function(object){
+                var o = object;
+                var oLeft = o.offsetLeft;
+                var oParent = null;
+                while(o.offsetParent!=null) {
+                    oParent = o.offsetParent;
+                    oLeft += oParent.offsetLeft;
+                    o = oParent;
+                }
+                return oLeft;
+            },
+            getAbsoluteTop:function(object){
+                var o = object;
+                var oTop = o.offsetTop;
+                while(o.offsetParent!=null) {
+                    oParent = o.offsetParent;
+                    oTop += oParent.offsetTop;  // Add parent top position
+                    o = oParent;
+                }
+                return oTop;
+            },
+            getElementWidth:function(object){
+                return object.offsetWidth;
+            },
+            getElementHeight:function(object){
+                return object.offsetHeight;
+            },
+            appendList:function(items){
+                $(this.resultContainer).find("div").remove();
+                var html = "";
+                for(var i=0;i< items.length;i++){
+                    html += "<div tag='chooseItem' _name='"+items[i].name+"' _val = '"+items[i].val+"'>";
+                    if(items[i].ck){
+                        html += "<span><input type='checkbox' checked="+items[i].ck+" /></span>";
+                    }else{
+                        html += "<span><input type='checkbox' /></span>";
+                    }
+
+                    html += "<span>"+items[i].name+"</span>";
+                    html += "</div>";
+                }
+                $(this.resultContainer).append($(html));
+            },
+            setStyles:function(){
+
+                var width = this.getElementWidth(this.select_checkbox_currentDiv);
+                var height = this.getElementHeight(this.select_checkbox_currentDiv);
+                var margin = 3;
+                var borderLeft = parseInt(this.select_checkbox_currentDiv.style.borderLeftWidth);
+                var borderRight = parseInt(this.select_checkbox_currentDiv.style.borderRightWidth);
+                var top = this.getAbsoluteTop(this.select_checkbox_currentDiv);
+                var left = this.getAbsoluteLeft(this.select_checkbox_currentDiv);
+
+                this.parentsContainer.style.top = top + margin + "px";
+                this.parentsContainer.style.left = left + "px";
+                this.inputText.style.width = width -2 - borderLeft - borderRight + "px";
+                this.resultSpan.style.height = height;
+            },
+            textChangeEvent:function(){
+                $(this.inputText).bind("change, input",function(){
+                    var val = $(this).val().trim();
+                    var res = itemsCtl.getItemsByVal(val);
+                    select_checkbox_ctrl.appendList(res);
+                })
+            },
+            itemCheckedEvent:function(){
+                $(this.resultContainer).delegate("div[tag=chooseItem]","click",function(){
+                    var ck = $(this).find("input[type=checkbox]").get(0);
+                    var val = $(this).attr("_val");
+
+                    var item = itemsCtl.getSingleItemByVal(val);
+
+                    ck.checked?item.ck = false:item.ck = true;
+                    ck.checked?ck.checked = false:ck.checked=true;
+
+                    var res = itemsCtl.getCkItems();
+
+                    var val = res.names.join(',');
+
+                    select_checkbox_Root.querySelector("#result").innerText = val;
+                })
+            },
+            inputText:null,
+            parentsContainer:null,
+            resultContainer:null,
+            resultSpan:null,
+            select_checkbox_currentDiv:null,
+            showResultSpanHideOthers:function(){
+                $(this.parentsContainer).show().find("#result").show().siblings().hide();
+            },
+            showAll:function(){
+                $(this.parentsContainer).show().children().show();
+            },
+            changeItemsAndShow:function(){
+                var res = itemsCtl.getCkItems();
+                select_checkbox_ctrl.appendList(itemsCtl.items);
+                var val = res.names.join(',');
+                select_checkbox_Root.querySelector("#result").innerText = val;
+                this.showResultSpanHideOthers();
+            }
+        }
+
+        var ItemsCtrl = function(){
+            this.items = [];
+
+            this.addItem = function(item){
+                this.items.push(item);
+            }
+
+            this.getItemsByVal = function(val){
+                var _res = [];
+                for(var i=0;i<this.items.length;i++){
+                    var tmp = this.items[i];
+                    if(tmp.name.indexOf(val) != -1){
+                        _res.push(tmp);
+                    }
+                }
+                return _res;
+            }
+
+            this.getSingleItemByVal = function(val){
+                var _res = null;
+                for(var i=0;i<this.items.length;i++){
+                    var tmp = this.items[i];
+                    if(tmp.val == val){
+                        _res = tmp;
+                        break;
+                    }
+                }
+                return _res;
+            }
+
+            this.getCkItems = function(){
+                var res = {names:[],vals:[]};
+                for(var i=0;i<this.items.length;i++){
+                    if(this.items[i].ck){
+                        res.names.push(this.items[i].name);
+                        res.vals.push(this.items[i].val);
+                    }
+                }
+                return res;
+            }
+
+            this.setItemsStatus = function(vals){
+
+                for(var j=0;j<this.items.length;j++){
+                    var exist = false;
+                    for(var i=0;i<vals.length;i++){
+                        if(vals[i] == this.items[j].val){
+                            exist = true;
+                            break;
+                        }
+                    }
+                    this.items[j].ck = exist;
+                }
+
+
+            }
+
+            this.unCheckAll = function(){
+                for(var i=0;i<this.items.length;i++){
+                    this.items[i].ck = false;
+                }
+            }
+
+            this.selectAll = function(){
+                for(var i=0;i<this.items.length;i++){
+                    this.items[i].ck = true;
+                }
+            }
+        }
+
+        var ItemCtrl = function(option){
+            this.name = option.displayName;
+            this.val = option.displayValue;
+            this.ck = false;
+        }
+
+        var itemsCtl = new ItemsCtrl();
+
+        var select_checkbox_doc = document.currentScript.ownerDocument;
+        var select_checkbox_proto = Object.create(HTMLDivElement.prototype);
+        var select_checkbox_Root = null;
+
+
+        select_checkbox_proto.createdCallback = function(){
+
+            select_checkbox_ctrl.select_checkbox_currentDiv = this;
+
+            var that = this;
+
+            var temp = select_checkbox_doc.querySelector("#selCkTemplate");
+
+            select_checkbox_Root = this.createShadowRoot();
+
+            var url = $(this).attr("url");
+
+            var key = that.getAttribute("displayName");
+            var val = that.getAttribute("displayValue");
+            if(url && key && val){
+
+                $.ajax({
+                    url:url,
+                    type:"get",
+                    dateType:"json",
+                    success:function(d){
+
+                        d = d.selectCheckbox;
+
+                        for(var i=0;i< d.length;i++){
+                            var item = new ItemCtrl({displayName:d[i][key],displayValue:d[i][val]});
+                            itemsCtl.addItem(item);
+                        }
+
+                        var clone = document.importNode(temp.content,true);
+
+                        select_checkbox_Root.appendChild(clone);
+
+                        select_checkbox_ctrl.inputText = select_checkbox_Root.querySelector("#sText");
+                        select_checkbox_ctrl.parentsContainer = select_checkbox_Root.querySelector(".c");
+                        select_checkbox_ctrl.resultContainer = select_checkbox_Root.querySelector("#listContainer");
+                        select_checkbox_ctrl.resultSpan = select_checkbox_Root.querySelector("#result");
+
+                        select_checkbox_ctrl.appendList(itemsCtl.items);
+                        select_checkbox_ctrl.setStyles();
+                        select_checkbox_ctrl.textChangeEvent();
+                        select_checkbox_ctrl.itemCheckedEvent();
+                    }
+                })
+            }
+            else{
+                alert("url,displayName,displayValue must be required!");
+            }
+
+            $(this).unbind("click").bind("click",function(e){
+                select_checkbox_ctrl.showAll();
+                e.stopPropagation();
+            })
+
+            $(document).bind("click",function(e){
+                var el = e.target;
+                if($(el).parents('div.c').length == 0){
+                    select_checkbox_ctrl.showResultSpanHideOthers();
+                }
+            })
+        }
+
+        select_checkbox_proto.getSelectItems = function(){
+            return itemsCtl.getCkItems();
+        }
+
+        select_checkbox_proto.selectAll = function(){
+            itemsCtl.selectAll();
+            select_checkbox_ctrl.changeItemsAndShow();
+        }
+
+        select_checkbox_proto.unCheckAll = function(){
+            itemsCtl.unCheckAll();
+            select_checkbox_ctrl.changeItemsAndShow();
+        }
+
+        select_checkbox_proto.setValue = function(vals){
+            itemsCtl.setItemsStatus(vals);
+            select_checkbox_ctrl.changeItemsAndShow();
+        }
+
+        document.registerElement("select-checkbox",{prototype:select_checkbox_proto,extends: 'div'});
+    })();
+
+</script>

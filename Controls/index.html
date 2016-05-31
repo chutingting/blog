@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <style type="text/css" rel="stylesheet">
+        span{
+            border: 1px solid deepskyblue;
+        }
+    </style>
+
+    <link rel="import" href="checkBoxList.html" />
+    <link rel="import" href="selectRemote.html" />
+    <link rel="import" href="selctCheckbox.html" />
+    <link rel="import" href="validate.html" />
+    <link rel="import" href="errorMsg.html" />
+    <link rel="import" href="paging.html" />
+    <link rel="import" href="uploadFile.html"/>
+
+    <script src="../lib/jquery.js"></script>
+</head>
+<body>
+
+<div>
+    <label>CheckboxList 组件</label>
+    <checkbox-list id="cbl" remote="false" url="data.json" displayName="name" displayValue="value">
+        <section>
+            aa:<input type="checkbox" value="11" />
+            bb:<input type="checkbox" value="2" />
+            cc:<input type="checkbox" value="33" />
+        </section>
+    </checkbox-list>
+    <input type="button" value="获取当前选中项" id="btn1" />
+    <input type="button" value="设置当前选中项" id="btn2" />
+    <input type="button" value="全选所有选中项" id="btn3" />
+    <input type="button" value="清空所有选中项" id="btn4" />
+</div>
+<div>
+    <label>SelectRemote 组件</label>
+    <select-remote id="sr" url="data.json" displayName="name" displayValue="value"></select-remote>
+    <input type="button" value="获取当前选中项" id="btns1" />
+    <input type="button" value="设置当前选中项" id="btns2" />
+</div>
+
+<div>
+    <lable>带checkbox的下拉框</lable>
+
+    <div>
+        <!--请选择Lenovo产品:-->
+        <div id="scks" is="select-checkbox" url="data.json" displayName="name" displayValue="value" style="margin-left:100px;float: left;border: 1px solid red;width: 100px;min-height: 20px;"></div>
+        <input type="button" value="setValue" id="btnsc1" />
+        <input type="button" value="checkAll" id="btnsc2" />
+        <input type="button" value="unCheckAll" id="btnsc3" />
+        <input type="button" value="getSelectItems" id="btnsc4" />
+    </div>
+</div>
+<div style="clear: both;"></div>
+<div>
+    <label>errorMsg</label>
+
+    <error-msg id="errorMsg"></error-msg>
+    <error-msg id="errorMsg1"></error-msg>
+
+    <input type="button" value="Show" id="btner1" />
+    <input type="button" value="Hide" id="btner2" />
+</div>
+
+<div>
+    <label>input-string</label>
+    <input id="t1" is="input-string" required="true" special="false" errorMsg = "必填项,不允许特殊字符" />
+    <input id="t2" is="input-string" required="false" special="true" errorMsg = "t2必填项" />
+    <input type="button" value="submit Form" id="btnvali" />
+</div>
+
+<div>
+    <label>input-date</label>
+    <input id="da1" is="input-date" beginDate="2016-5-10" errorMsg = "输入时间必须大于开始时间" />
+    <input id="da2" is="input-date" beginDate="2016-5-10" endDate="2016-5-20" errorMsg = "输入时间必须小于结束时间" />
+    <input type="button" value="submit Form" id="btnvalida" />
+</div>
+
+<div>
+    <label>分页控件</label>
+    <list-paging id="p1" url="data.json" pageIndex="1" pageSize="10" callback="render"></list-paging>
+
+    <input type="button" id="sbtn1" value="模拟查询参数1" />
+</div>
+
+<div>
+    <label>文件拖动上传</label>
+    <drag-file callback="readFile" isImg="true"></drag-file>
+
+    <div id="dragResult"></div>
+</div>
+
+</body>
+</html>
+<script>
+    /*
+    * CheckboxList 组件
+    */
+    var cbl = document.getElementById("cbl");
+
+    document.getElementById("btn1").addEventListener("click",function(){
+        var cks = cbl.getValue();
+        console.log(cks);
+    },false)
+    document.getElementById("btn2").addEventListener("click",function(){
+        cbl.setCheckboxStatus(["1","2"]);
+    },false)
+    document.getElementById("btn3").addEventListener("click",function(){
+        cbl.setAllStatus(true);
+    },false)
+    document.getElementById("btn4").addEventListener("click",function(){
+        cbl.setAllStatus(false);
+    },false)
+
+    /*
+     * SelectRemote 组件
+     */
+    var sr = document.getElementById("sr");
+    $("#btns1").click(function(){
+        var sel = sr.getValue();
+        console.log(sel);
+    })
+    $("#btns2").click(function(){
+        sr.setValue(4);
+    })
+
+    sr.change = function(e,items,val){
+        console.log(e,items,val);
+    };
+
+    /*
+     * SelectCheckbox
+     */
+    var scks = document.querySelector("#scks");
+    $("#btnsc1").click(function(){
+        scks.setValue([1,"2"]);
+    })
+    $("#btnsc2").click(function(){
+        scks.selectAll();
+    })
+    $("#btnsc3").click(function(){
+        scks.unCheckAll();
+    })
+    $("#btnsc4").click(function(){
+        console.log(scks.getSelectItems());
+    })
+
+    /*
+     * input-string
+     *
+     * 可配置是否必填，是否允许特殊字符，以及错误提示语
+     */
+    var t1 = document.querySelector("#t1");
+    var t2 = document.querySelector("#t2");
+    document.querySelector("#btnvali").addEventListener("click",function(){
+        var v1 = t1.validateStatus;
+        var v2 = t2.validateStatus;
+    },false);
+
+    /*
+    * 分页组件
+    * 服务器返回数据格式
+    * totalCount 代表总条数
+    * pageTotalNum 代表总页数
+    * 数据放在 d.data属性里面
+    *
+    * example: {totalCount:6,pageTotalNum:1,data:[]}
+    */
+    var p1 = document.querySelector("#p1");
+    function render(d){
+        console.log(d);
+    }
+
+    document.querySelector("#sbtn1").addEventListener("click",function(){
+        p1.setUrl("data.json?key=13").search();
+    },false);
+
+    /*
+    * 文件上传
+    * 必须配置callback函数
+    * isImg默认为false
+    * example: <drag-file callback="readFile" isImg="true"></drag-file>
+    */
+    function readFile(d){
+        console.log(d);
+    }
+</script>
