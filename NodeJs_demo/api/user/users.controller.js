@@ -2,6 +2,8 @@
 var User = require('./userModel');
 var Q = require("q");
 
+var utils = require('../../httpClient/serverUtils.js');
+
 //注意接受参数的2种形式
 
 //post : req.body.name
@@ -33,3 +35,27 @@ exports.removeByIds = function(req,res){
         }
     })
 }
+
+exports.client1 = function(req,res){
+    utils.httpRequest("/users",req.body,"POST",null,function(e,d){
+        if(d && d.data){
+            return res.json(200, {success:true});
+        }
+        else{
+            return res.json(200, {success:false});
+        }
+    })
+}
+
+exports.client2 = function(req,res){
+    var ids = req.params.ids;
+    utils.httpRequest("/users/"+ids,{},"GET",null,function(e,d){
+        if(d && d.error){
+            return res.json(200, {success:false,data: d.message});
+        }
+        else{
+            return res.json(200, {success:true,data: d.data,count: d.count});
+        }
+    })
+}
+
