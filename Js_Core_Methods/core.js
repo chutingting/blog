@@ -12,7 +12,6 @@
         return this.replace(/(^\s*)|(\s*$)/g, '');
     }
 
-
     ///**********************************
     /// Array prototypes
     ///**********************************
@@ -71,7 +70,7 @@
                     }
                 }
                 if(typeof currentObj[key] == "object"){
-                    if (currentObj[key].equals(value) == true ) {
+                    if (currentObj[key].equals(value) == true) {
                         return true;
                     }
                 }
