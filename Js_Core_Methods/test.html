@@ -3,13 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
+    <style type="text/css">
+        .red{
+            color: red;
+        }
+    </style>
     <script src="core.js"></script>
 </head>
 <body>
-    test info
+    <div>
+        <div class="red">String prototypes</div>
+        <div>
+            <span>Trim: </span>
+            <span>验证通过</span>
+        </div>
+
+        <div class="red">Array prototypes</div>
+        <div>
+            <span>unique值类型:</span>
+            <span>验证通过</span>
+        </div>
+        <div>
+            <span>unique引用类型:</span>
+            <span>验证通过</span>
+        </div>
+        <div>
+            <span>remove(只针对值类型):</span>
+            <span>验证通过</span>
+        </div>
+        <div>
+            <span>removeAt:</span>
+            <span>验证通过</span>
+        </div>
+        <div>
+            <span>containsByKey(值类型,引用类型都可以)</span>
+            <span>验证通过</span>
+        </div>
+    </div>
 </body>
 </html>
-
 <script>
-    $http.ajax
+    var trimStr = " aaa asd ";
+    trimStr = trimStr.trim();
+
+    var arrayUniqueString = [1,2,3,4,5,6,1,1,2];
+    arrayUniqueString = arrayUniqueString.unique();
+
+    var arrayUniqueObject = [{name:1,childred:[{age:1}]},{name:1,childred:[{age:1}]},{name:1,childred:[{age:2}]}];
+    arrayUniqueObject = arrayUniqueObject.unique();
+
+    var arrayRemoveString = [1,2,3,4,5,6];
+    arrayRemoveString.remove(2);
+
+    var arrayRemoveAtString = [1,2,3,4,5,6];
+    arrayRemoveAtString.removeAt(3);
+
+    var arrayContainsByKey = [{name:"damon",age:2,child:[{name:12}]},{name:2,age:3,child:[{name:1,age:2}]}];
+    var bl = arrayContainsByKey.containsByKey("child",[{name:12}]);
 </script>

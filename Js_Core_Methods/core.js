@@ -17,19 +17,30 @@
     /// Array prototypes
     ///**********************************
 
-    //数组去重
+    //数组去重, 值类型和引用类型均可判断
     Array.prototype.unique = function(){
         this.sort();
         var re=[this[0]];
-        for(var i = 1; i < this.length; i++) {
-            if( this[i] !== re[re.length-1]) {
-                re.push(this[i]);
+
+        if(typeof this[0] == "object"){
+            for(var i = 1; i < this.length; i++) {
+                if( this[i].equals(re[re.length-1]) == false) {
+                    re.push(this[i]);
+                }
+            }
+        }else{
+            for(var i = 1; i < this.length; i++) {
+                if( this[i] !== re[re.length-1]) {
+                    re.push(this[i]);
+                }
             }
         }
+
+
         return re;
     }
 
-    //删除数组的某项
+    //删除数组的某项,只针对数组里面为引用类型
     Array.prototype.remove = function(item){
         var index = this.indexOf(item);
         if(index >= 0){
@@ -53,9 +64,19 @@
         if (key && typeof key == 'string' && (value || value == 0)) {
             for (var i = 0; i < this.length; i++) {
                 var currentObj = this[i];
-                if (currentObj[key] == value) {
-                    return true;
+
+                if(typeof currentObj[key] == "string"){
+                    if (currentObj[key] == value) {
+                        return true;
+                    }
                 }
+                if(typeof currentObj[key] == "object"){
+                    if (currentObj[key].equals(value) == true ) {
+                        return true;
+                    }
+                }
+
+
             }
         }
         return false;
