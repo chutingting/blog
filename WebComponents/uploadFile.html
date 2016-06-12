@@ -68,7 +68,7 @@
             }
 
             render.onload = function(){
-                window[callback]({rc:true,data:this});
+                window[callback]({rc:true,data:this.result});
             }
 
             if(isImg){
