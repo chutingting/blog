@@ -240,12 +240,6 @@
             var r = window.location.search.substr(1).match(reg);
             if(r!=null)return  decodeURIComponent(r[2]); return null;
         },
-        /*
-        * 一个数组里面按照时间字段来排序的方法
-        * @data  数据源
-        * @field 排序日期字段
-        * @desc  升序为true 降序为true
-        * */
         arraySortByDate:function(data,field,desc){
             if(data == undefined || data.length == 0 ){
                 return null;
@@ -319,12 +313,24 @@
 
             return res;
         },
-        arraySortByField:function(data,field,desc){
+        /*
+         * 一个数组里面按照字段来排序的方法
+         * @data  数据源
+         * @field 排序字段
+         * @desc  升序为true 降序为true
+         * @overwrite 排序结果是否影响数据源,默认为不影响
+         * */
+        arraySortByField:function(data,field,desc,overwrite){
             if(data == undefined || data.length == 0 ){
                 return null;
             }
 
-            var res = data.cloneArray();
+            var res = null;
+            if(!overwrite){
+                res = data.cloneArray();
+            }else{
+                res = data;
+            }
 
             var tmp = res[0][field];
             //除去日期对象,其他对象类型不排序
@@ -369,6 +375,20 @@
             else{
                 return JSON.stringify(val);
             }
+        },
+        getLocalStorage:function(key){
+            if(!window.localStorage){
+                alert("您的浏览器不支持localStorage");
+                return
+            }
+            return window.localStorage.getItem(key);
+        },
+        setLocalStorage:function(key,val){
+            if(!window.localStorage){
+                alert("您的浏览器不支持localStorage");
+                return
+            }
+            window.localStorage.setItem(key,val);
         }
     }
 
