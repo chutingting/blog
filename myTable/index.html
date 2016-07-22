@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        .tableBox{
+            width: 100%;
+            margin-top: 20px;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+        }
+
+
+
+        .tableBox thead{
+            background-color: #fafafa;
+            line-height: 35px;
+        }
+
+        .tableBox tr{
+            line-height: 35px;
+        }
+
+        .tableBox tr td button{
+            width: 60px;
+            height: 24px;
+            line-height: 24px;
+            font-size: 12px;
+            background-color: #ffa600;
+            border: none;
+            color: #ffffff;
+            cursor: pointer;
+            border-radius: 3px;
+            -webkit-border-radius: 3px;
+        }
+
+        .tableBox tr td button:hover{
+            background-color: #ffb62d;
+        }
+
+    </style>
+    <script src="../Resource/Js/jq_jqUI/jquery-1.11.2.min.js"></script>
+    <script src="../Js_Core_Methods/core.js"></script>
+</head>
+<body>
+
+    <div class="toolbar">
+        <button>新增</button>
+        <button>复制</button>
+        <button>修改</button>
+        <button>删除</button>
+
+        <input type="text" id="name" />
+        <button>查询</button>
+    </div>
+
+    <div>
+        <table class="tableBox" id="tab"></table>
+    </div>
+</body>
+</html>
+<script>
+
+    var Engine = function(){
+
+        //全局开关，任何一个环节出问题，该开关会变为false
+        this._flag = true;
+
+        //记录错误信息日志
+        this._errModel = new ErrorMsgModel();
+        //列名称
+        this._colsModel = new ColModel(this);
+        //tr body model
+        this._trBodyMs = [];
+        //tr head model
+        this._trHeaderM = new TrModel();
+
+        //table容器
+        this._tabContainer = null;
+
+        //头容器
+        this._headContainer = null;
+        //body容器
+        this._bodyContainer = null;
+
+        //列名映射
+        this.map = null;
+
+        //是否显示checkbox, 默认为true
+        this.showCk = true;
+
+        //数据源
+        this.datas = [];
+
+        this.init = function(option){
+            if(!option.data || option.data.length == 0){
+                this._errModel.addMsg("数据源存在问题!");
+                this._flag = false;
+            }
+            else{
+                this.datas = option.data;
+                // set map
+                this.map = option.map;
+                this._colsModel.setMap();
+
+                if(option.showCk != undefined){
+                    this.showCk = option.showCk;
+                }
+
+                //get columns
+                this._colsModel.getCols(this.datas[0]);
+                var tmpCols = this._colsModel.disPlayCols;
+
+                //构建tr body 模型
+                for(var i=0;i<this.datas.length;i++){
+                    var tmpTrM = new TrModel();
+                    tmpTrM.data = this.datas[i];
+                    for(var k=0;k<tmpCols.length;k++){
+                        var tmpTdM = new TdModel({val:this.datas[i][tmpCols[k]]});
+                        tmpTrM.addTd(tmpTdM);
+                    }
+                    this._trBodyMs.push(tmpTrM);
+                }
+
+                //构建 tr header 模型
+                for(var i=0;i<tmpCols.length;i++){
+                    var _tdM = new TdModel({val:this._colsModel.getColName(tmpCols[i])});
+                    this._trHeaderM.addTd(_tdM);
+                }
+            }
+            return this;
+        }
+
+        this.renderHeader = function () {
+            var tmpTrV = new TrView(this._trHeaderM, this);
+            tmpTrV.render(1,this._headContainer, this.showCk);
+        }
+
+        this.renderBody = function(){
+            var tmp = this._trBodyMs;
+            for(var i=0;i< tmp.length;i++){
+                var tmpTrV = new TrView(tmp[i],this);
+                tmpTrV.render(2,this._bodyContainer, this.showCk);
+            }
+        }
+
+        this.render = function(container){
+            this._tabContainer = container;
+            if(this._flag){
+                if(this._headContainer == null){
+                    this._headContainer = $("<thead _tag='"+Math.ceil(Math.random()*1000000)+"'></thead>");
+                    $(container).append(this._headContainer);
+                }
+                if(this._bodyContainer == null){
+                    this._bodyContainer = $("<tbody _tag='"+Math.ceil(Math.random()*1000000)+"'></tbody>");
+                    $(container).append(this._bodyContainer);
+                }
+                this.renderHeader();
+                this.renderBody();
+            }else{
+                alert(this._errModel.msgArr.join('---'));
+            }
+        }
+
+
+    }
+
+    var ErrorMsgModel = function(){
+        this.msgArr = [];
+
+        this.addMsg = function(str){
+            this.msgArr.push(str);
+        }
+    }
+
+    var ColModel = function(engine){
+
+        this.cols = [];
+
+        this.disPlayCols = [];
+        this.hideCols = [];
+
+        this.setMap = function(){
+            this.map = engine.map;
+        }
+
+        this.getDisplayCols = function(key){
+            var bl = false;
+            for(var i=0;i<this.map.length;i++){
+                if(this.map[i].key == key && this.map[i].display){
+                    bl = true;
+                    break;
+                }
+            }
+            return bl;
+        }
+        //对外公开的方法
+        this.getColName = function(key){
+            var res = "";
+            for(var i =0;i<this.map.length;i++){
+                if(this.map[i].key == key){
+                    res = this.map[i].val;
+                    break;
+                }
+            }
+            return res;
+        }
+
+        this.getCols = function(data){
+            if(typeof data != "object" || data instanceof Array){
+                engine._errModel.addMsg("根据数据源解析列名报错,参数格式不正确!");
+                engine._flag = false;
+                return;
+            }
+            for(var i in data){
+                if(this.getDisplayCols(i)){
+                    this.disPlayCols.push(i);
+                }else{
+                    this.hideCols.push(i);
+                }
+
+                this.cols.push(i);
+            }
+        }
+    }
+
+    var TrModel = function(){
+
+        this.view = null;
+
+        this.ck = false;
+
+        this.key = Math.ceil(Math.random()*1000000);
+
+        this.tds = [];
+
+        this.data = null;
+
+        this.setData = function(data){
+            this.data = data;
+        }
+
+        this.addTd = function(tdm){
+            this.tds.push(tdm);
+        }
+    }
+
+    var TdModel = function(option){
+
+        this._options = $.extend({},option);
+
+        this.key = Math.ceil(Math.random()*1000000);
+        this.value = this._options.val;
+    }
+
+    var TrView = function(model,engine){
+
+        model.view = this;
+
+        this.el = $("<tr _tag='"+model.key+"'></tr>");
+
+        //flag 1表示head   2表示body
+        this.render = function(flag, container, showCk){
+            var tmp = model.tds;
+
+            if(showCk){
+                if(flag == "1"){
+                    this.el.append("<input tag='ckall' type='checkbox' />");
+                }else{
+                    this.el.append("<input tag='ckone' type='checkbox' />");
+                }
+            }
+
+            for(var i=0;i<tmp.length;i++){
+                this.el.append($("<td _tag='"+tmp[i].key+"'>"+tmp[i].value+"</td>"));
+            }
+
+            $(container).append(this.el);
+
+            $(container).delegate("tr[_tag="+model.key+"] input[type=checkbox][tag=ckone]","click",function(){
+                model.ck = this.checked;
+            })
+            $(container).delegate("tr[_tag="+model.key+"] input[type=checkbox][tag=ckall]","click",function(){
+
+                var ck = this.checked
+
+                for(var i=0;i<engine._trBodyMs.length;i++){
+                    engine._trBodyMs[i].ck = ck;
+                }
+                $(engine._bodyContainer).find("input[type=checkbox][tag=ckone]").each(function(){
+                    this.checked = ck;
+                })
+            })
+        }
+
+        this.remove = function(){
+            $(this.el).remove();
+        }
+    }
+
+    var engine = new Engine();
+
+    jsCoreMethod.jqGetData("data.json",function(d){
+        var tmp = d.listData;
+        var map = [
+            {key:"name",val:"姓名",display:true},
+            {key:"age",val:"年龄",display:true},
+            {key:"sex",val:"性别",display:false},
+            {key:"address",val:"地址",display:true}
+        ]
+        engine.init({data:tmp,map:map,showCk:true}).render($("#tab"));
+    })
+</script>
