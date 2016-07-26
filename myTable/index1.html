@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        .tableBox{
+            width: 100%;
+            margin-top: 20px;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+        }
+
+
+
+        .tableBox thead{
+            background-color: #fafafa;
+            line-height: 35px;
+        }
+
+        .tableBox tr{
+            line-height: 35px;
+        }
+
+        .tableBox tr td button{
+            width: 60px;
+            height: 24px;
+            line-height: 24px;
+            font-size: 12px;
+            background-color: #ffa600;
+            border: none;
+            color: #ffffff;
+            cursor: pointer;
+            border-radius: 3px;
+            -webkit-border-radius: 3px;
+        }
+
+        .tableBox tr td button:hover{
+            background-color: #ffb62d;
+        }
+
+    </style>
+    <script src="../Resource/Js/jq_jqUI/jquery-1.11.2.min.js"></script>
+    <script src="../Js_Core_Methods/core.js"></script>
+</head>
+<body>
+
+    <div class="toolbar">
+        <button>新增</button>
+        <button>复制</button>
+        <button>修改</button>
+        <button>删除</button>
+
+        <input type="text" id="name" />
+        <button>查询</button>
+    </div>
+
+    <div>
+        <table class="tableBox" id="tab"></table>
+    </div>
+
+</body>
+</html>
+<script>
+    var Engine = function(){}
+
+    var BaseItem = function(){
+        this.val = null;
+
+        this.cols = [];
+
+        this.addCols = function(col){
+            this.cols.push(col);
+        }
+    }
+
+    var HeaderItem = function(){
+        BaseItem.apply(this,arguments);
+
+        this.flag = "head";
+    }
+
+    var BodyItem = function(){
+        BaseItem.apply(this,arguments);
+
+        this.flag = "body";
+    }
+</script>
