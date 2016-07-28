@@ -49,13 +49,15 @@ angular.module('app').factory("tools",function($http,$state,$rootScope){
                 }
             }
             return res;
-        },
+        }
+
         //选择全部
         this.setSelectAll = function(data,tag){
             for(var i=0;i<data.length;i++){
                 data[i].ck = tag;
             }
-        },
+        }
+
         //选择单个
         this.setChooseOne = function(data,cb){
             var len = data.length;
@@ -69,7 +71,6 @@ angular.module('app').factory("tools",function($http,$state,$rootScope){
             }
             cb(tagAll);
         }
-
 
         this.getTemplate = function(){
             this.templateType = [];

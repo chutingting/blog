@@ -533,8 +533,13 @@
                 }
             }, false)
         },
-        setCookie:function(key,val){
-            document.cookie = key+"="+val;
+        setCookie:function(key,val,min){
+            if(!min){
+                min = 999999;
+            }
+            var date=new Date();
+            date.setTime(date.getTime()+parseInt(min)*60*1000);
+            document.cookie=key+"="+val+"; expires="+date.toGMTString();
         },
         getCookie:function(key){
             if(!document.cookie){
