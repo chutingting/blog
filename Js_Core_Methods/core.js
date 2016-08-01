@@ -484,6 +484,9 @@
             if (!str) {
                 return "";
             }
+            if(str.length <= num){
+                return str;
+            }
             return str.substring(0, num) + "...";
         },
         /*
@@ -529,6 +532,9 @@
                         }else{
                             filereader.readAsBinaryString(file);
                         }
+                    }
+                    if(tag == "file"){
+                        filereader.readAsBinaryString(file);
                     }
                 }
             }, false)
@@ -621,6 +627,17 @@
                     if(_cb){
                         _cb(d);
                     }
+                }
+            })
+        },
+        jqJsonPGetData:function(url,paramsName,cb){
+            $.ajax({
+                url:url,
+                type:"get",
+                jsonp:paramsName,
+                dataType:"jsonp",
+                success:function(d){
+                    cb(d);
                 }
             })
         },
