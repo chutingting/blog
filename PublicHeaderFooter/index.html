@@ -13,10 +13,11 @@
 </html>
 <script src="public.js"></script>
 <script>
-
     var h = "<header><ul class='ul1'><li>欢迎来到联想商城</li><li>服务</li><li>搜索</li><li id='li1'>17商城</li></ul></header>";
     var f = "<footer><ul class='ul1'><li id='li2'>欢迎11111</li><li>服务</li><li>搜索</li><li>17商城</li></ul></footer>";
+    var b = ["jquery-1.11.2.min.js"];
+    var o = ["site.css","data.json","header.js","footer.js"];
 
     var p = new public();
-    p.init({header:h,footer:f,baseFile:["jquery-1.11.2.min.js"],otherFile:["site.css","data.json","header.js","footer.js"]});
+    p.init({header:h,footer:f,baseFile:b,otherFile:o,share:true});
 </script>
