@@ -143,6 +143,18 @@
         return res;
     }
 
+    Array.prototype.removeItems = function(items){
+        if(this.length == 0){
+            return [];
+        }
+        if(items.length == 0){
+            return this;
+        }
+        for(var k=0;k<items.length;k++){
+            this.remove(items[k]);
+        }
+        return this;
+    }
 
     ///**********************************
     /// Object prototypes
@@ -698,5 +710,33 @@
             }else{
                 return {bl:false,msg:msg};
             }
+        },
+        fileUploadByFormAjax:function(id, cb, size,url){
+            if(!size){
+                size = 9999999999;
+            }
+            $("body").on("change","#"+id,function(e){
+                var file = e.target.files[0];
+                var filesize = Math.floor(file.size)/1024;
+                if(filesize > size) {
+                    alert("上传大小不能超过"+size+"KB");
+                    return false;
+                }else{
+                    $.ajaxFileUpload({
+                        url: url,//'/api/imageUpload/uploadJson',
+                        type: 'post',
+                        data: null,
+                        secureuri: false,
+                        fileElementId: id,
+                        dataType: 'json',
+                        success: function (data){
+                            cb(data);
+                        },
+                        error: function (data, status, e){
+                            alert(e);
+                        }
+                    })
+                }
+            });
         }
     }
